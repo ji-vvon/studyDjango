@@ -1,0 +1,10 @@
+<h1><span style = "background-color : rgb(255, 237, 177)">Write Your Blog&#x1F4DD</span></h1>
+
+<form action="{% url 'create' %}" method="post">
+    {% csrf_token %} 
+    <p>제목: <input type="text" name="title"></p>
+    <p>작성자: <input type="text" name="writer"></p>
+    본문: <textarea name="body" id="" cols="30" rows="10"></textarea>
+    <button type="submit" style = "background-color : rgb(255, 245, 209);">submit</button>
+
+</form>
