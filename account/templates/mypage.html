@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    table, td, th{
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    table{
+        margin:auto;
+        width:80%;
+    }
+</style>
+
+</br><h3 style="display: inline; color:green">{{user.username}}</h3>님의 회원정보입니다.<hr></hr></br>
+<table border="1" bordercolor="blue">
+        <tr>
+            <td>회원 ID</td>
+            <td>{{user.username}}</td>
+        </tr>
+        <tr>
+            <td>회원 닉네임</td>
+            <td>{{user.nickname}}</td>
+        </tr>
+        <tr>
+            <td>대학교</td>
+            <td>{{user.university}}</td>
+        </tr>
+        <tr>
+            <td>사는곳</td>
+            <td>{{user.location}}</td>
+        </tr>
+    </table>
+    </br><a href="{% url 'home' %}">확인</a>
+
+{% endblock %}

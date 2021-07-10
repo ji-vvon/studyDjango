@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-    <style>
-        body{text-align: center;}
-    </style>
-</head>
-<body>
-    <h1 style="background-color:rgb(177, 220, 255);">Blog Project&#x1F3E1</h1>
-    <div>
-        <a href= "{%url 'new'%}">write blog&#x1F4DD</a>
-    </div>
+{% extends 'base.html' %}
+{% block content %}
+    {% if user.is_authenticated %}
+    </br><h3 style="display: inline; color:green">{{user.username}}</h3>님 환영합니다🖐<hr></hr></br>
+    {% endif %}
+    {% if not user.is_authenticated %}
+    </br><h4>로그인 해주세요🔒</h4><hr></hr></br>
+    {% endif %}
     <div class="container">
     {% for blog in blogs%}
         <div>
-        <h3><span style="background-color: rgb(210, 234, 255);">{{blog.title}}</span></h3>
+        <h4 style="color: orange">{{blog.title}}</h4>
         <!-- {{blog.id}} -->
         {{blog.writer}}
-        {{blog.summary}} <a href = "{%url 'detail' blog.id %}">...more</a>
+        {{blog.summary}}
+        {% if blog.image %}
+        <p><img src="{{blog.image.url}}" alt="" width="100" height="100"></p>
+        {% endif %}
+        <a href = "{%url 'detail' blog.id %}">...more</a></br></br>
         <br>
         </div>
     {% endfor %}
     </div>
-</body>
-</html>
+
+    {% if blogs.has_previous%}
+    <a href="?page=1">처음</a>
+    <a href="?page={{blogs.previous_page_number}}">이전</a>
+    {% endif %}
+    <span>{{blogs.number}}</span>
+    <span>of</span>
+    <span>{{blogs.paginator.num_pages}}</span>
+    {% if blogs.has_next%}
+    <a href="?page={{blogs.next_page_number}}">다음</a>
+    <a href="?page={{blogs.paginator.num_pages}}">마지막</a>
+    {% endif %}
+
+{% endblock %}

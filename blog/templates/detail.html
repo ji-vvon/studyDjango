@@ -1,23 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail</title>
-    <style>
-        body{text-align: center;}
-    </style> 
-</head>
-<body>
-    <h1><span style="background-color: rgb(210, 234, 255);">{{blog.title}}</span></h1>
+{% extends 'base.html' %}
+{% block content %}
+    <br><h2 style="color: orange">{{blog.title}}</h2></br>
     <div> 
-    {{blog.writer}}
-    {{blog.pub_date}}
+    <b>작성자</b> : {{blog.writer}}</br>
+    <b>작성일</b> : {{blog.pub_date}}
     </div>
     <hr>
-    <p>{{blog.body}}</p>
+    {% if blog.image %}
+    <p><img src="{{blog.image.url}}" alt=""></p>
+    {% endif %}
+    <p>{{blog.body}}</p></br>
     <a href="{% url 'edit' blog.id %}">수정하기</a><a> / </a>
     <a href="{% url 'delete' blog.id %}">삭제하기</a>
-</body>
-</html>
+{% endblock %}

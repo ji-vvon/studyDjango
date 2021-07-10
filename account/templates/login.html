@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1><span style = "background-color : rgb(255, 237, 177)">Login&#x1F4DD</span></h1>
+
+<form action="{%url 'login'%}" method="post">
+    {% csrf_token %} 
+    {{form.as_p}}
+    <button type="submit" style = "background-color : rgb(255, 245, 209);">submit</button>
+
+</form>
+{% endblock %}
